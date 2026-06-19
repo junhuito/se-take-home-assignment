@@ -67,6 +67,7 @@ export default function Home() {
               titleClassName={column.titleClassName}
               emptyLabel={column.emptyLabel}
               orders={column.selectOrders(orderSystem)}
+              showCountdown={column.key === "processing"}
             />
           ))}
         </div>

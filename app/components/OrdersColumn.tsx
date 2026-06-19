@@ -6,6 +6,7 @@ interface OrdersColumnProps {
   titleClassName: string;
   emptyLabel: string;
   orders: Order[];
+  showCountdown?: boolean;
 }
 
 export const OrdersColumn = ({
@@ -13,6 +14,7 @@ export const OrdersColumn = ({
   titleClassName,
   emptyLabel,
   orders,
+  showCountdown = false,
 }: OrdersColumnProps) => {
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
@@ -23,7 +25,13 @@ export const OrdersColumn = ({
         {orders.length === 0 ? (
           <p className="text-gray-700 italic text-center py-8">{emptyLabel}</p>
         ) : (
-          orders.map((order) => <OrderCard key={order.id} order={order} />)
+          orders.map((order) => (
+            <OrderCard
+              key={order.id}
+              order={order}
+              showCountdown={showCountdown}
+            />
+          ))
         )}
       </div>
     </div>

@@ -8,6 +8,8 @@ export const BOT_EVENTS = {
   BOT_COMPLETE_ORDER: "BOT_COMPLETE_ORDER",
 };
 
+export const ORDER_PROCESSING_MS = 10000;
+
 type BotAction =
   | { type: "ADD_BOT"; payload: Bot }
   | { type: "REMOVE_BOT"; payload: number }
@@ -100,7 +102,7 @@ export const useBots = () => {
     const timer = setTimeout(() => {
       dispatch({ type: "COMPLETE_ORDER", payload: bot.id });
       eventBus.emit(BOT_EVENTS.BOT_COMPLETE_ORDER, bot, orderId);
-    }, 10000);
+    }, ORDER_PROCESSING_MS);
 
     dispatch({
       type: "ASSIGN_ORDER",
