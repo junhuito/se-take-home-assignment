@@ -1,3 +1,57 @@
+# McDonald's Order Management System
+
+Small Next.js app for managing McDonald's orders with automated cooking bots.
+
+## What It Does
+
+- Create `NORMAL` and `VIP` orders
+- Keep VIP orders ahead of normal orders while preserving VIP order sequence
+- Add and remove cooking bots dynamically
+- Move orders through `PENDING`, `PROCESSING`, and `COMPLETE`
+- Simulate cooking time with a 10 second processing window per order
+
+## Stack
+
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS 4
+
+## Run Locally
+
+```bash
+npm install
+npm run dev
+```
+
+Open `http://localhost:3000`.
+
+## Main Scripts
+
+```bash
+npm run dev
+npm run build
+npm run start
+npm run lint
+```
+
+## Project Structure
+
+```text
+app/
+  components/   reusable UI pieces
+  hooks/        order and bot logic
+  lib/          shared utilities
+  page.tsx      page composition
+  types.ts      shared types
+```
+
+## Notes
+
+- State is kept in memory only
+- Removing a processing bot returns its order to the pending queue
+- For Copilot-specific project context, see `copilot-instructions.md`
+
 ## FeedMe Software Engineer Take Home Assignment
 Below is a take home assignment before the interview of the position. You are required to
 1. Understand the situation and use case. You may contact the interviewer for further clarification.
