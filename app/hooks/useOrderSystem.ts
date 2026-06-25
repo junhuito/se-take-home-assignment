@@ -51,12 +51,14 @@ export const useOrderSystem = () => {
 
   useEffect(() => {
     eventBus.on(ORDER_EVENTS.ORDER_CREATED, handleOrderCreated);
+    eventBus.on(ORDER_EVENTS.ORDER_MOVED_TO_PENDING, handleOrderCreated);
     eventBus.on(BOT_EVENTS.BOT_ADDED, handleBotAdded);
     eventBus.on(BOT_EVENTS.BOT_REMOVED, handleBotRemoved);
     eventBus.on(BOT_EVENTS.BOT_COMPLETE_ORDER, handleBotComplete);
 
     return () => {
       eventBus.off(ORDER_EVENTS.ORDER_CREATED, handleOrderCreated);
+      eventBus.off(ORDER_EVENTS.ORDER_MOVED_TO_PENDING, handleOrderCreated);
       eventBus.off(BOT_EVENTS.BOT_ADDED, handleBotAdded);
       eventBus.off(BOT_EVENTS.BOT_REMOVED, handleBotRemoved);
       eventBus.off(BOT_EVENTS.BOT_COMPLETE_ORDER, handleBotComplete);

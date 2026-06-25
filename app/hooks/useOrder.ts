@@ -6,6 +6,7 @@ import { eventBus } from "../lib/eventBus";
 
 export const ORDER_EVENTS = {
   ORDER_CREATED: "ORDER_CREATED",
+  ORDER_MOVED_TO_PENDING: "ORDER_MOVED_TO_PENDING",
 };
 
 interface OrderState {
@@ -123,7 +124,10 @@ export const useOrder = () => {
 
   const moveOrderFromProcessToPending = useCallback((orderId: number) => {
     dispatch({ type: "MOVE_TO_PENDING", payload: orderId });
-  }, []);
+    const order = state.processing.find((o) => o.id === orderId);
+    if (!order) return;
+    eventBus.emit(ORDER_EVENTS.ORDER_MOVED_TO_PENDING, order);
+  }, [state.processing]);
 
   const setCompleteOrders = useCallback((orders: Order[]) => {
     dispatch({ type: "SET_COMPLETE", payload: orders });
