@@ -52,7 +52,10 @@ const orderReducer = (state: OrderState, action: OrderAction): OrderState => {
       return {
         ...state,
         pending: state.pending.filter((o) => o.id !== action.payload),
-        processing: [...state.processing, order],
+        processing: [...state.processing, {
+          ...order,
+          processingAt: new Date(),
+        }],
       };
     }
 
@@ -74,7 +77,10 @@ const orderReducer = (state: OrderState, action: OrderAction): OrderState => {
       return {
         ...state,
         processing: state.processing.filter((o) => o.id !== action.payload),
-        pending: sortPendingQueue([...state.pending, order]),
+        pending: sortPendingQueue([...state.pending, {
+          ...order,
+          processingAt: undefined,
+        }]),
       };
     }
 

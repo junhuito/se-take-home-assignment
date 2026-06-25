@@ -17,12 +17,13 @@ export const OrderCard = ({ order, showCountdown = false }: OrderCardProps) => {
 
   useEffect(() => {
     if (!showCountdown) return;
+    if (!order.processingAt) return;
 
-    const startTime = performance.now();
+    const startTime = order.processingAt.getTime();
     let frameId = 0;
 
-    const tick = (now: number) => {
-      const elapsed = now - startTime;
+    const tick = () => {
+      const elapsed = Date.now() - startTime;
       const nextRemaining = Math.max(ORDER_PROCESSING_MS - elapsed, 0);
       setRemainingMs(nextRemaining);
 
@@ -36,7 +37,7 @@ export const OrderCard = ({ order, showCountdown = false }: OrderCardProps) => {
     return () => {
       cancelAnimationFrame(frameId);
     };
-  }, [showCountdown]);
+  }, [order.processingAt, showCountdown]);
 
   const secondsLeft = Math.ceil(remainingMs / 1000);
   const progress = remainingMs / ORDER_PROCESSING_MS;

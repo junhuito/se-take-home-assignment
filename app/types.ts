@@ -7,6 +7,7 @@ export interface Order {
   botId?: number;
   createdAt: Date;
   completedAt?: Date;
+  processingAt?: Date;
 }
 
 export interface Bot {
